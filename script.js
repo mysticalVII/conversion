@@ -28,7 +28,8 @@ function createFallingElements(className) {
         const fallingElement = document.createElement('div');
         fallingElement.classList.add('falling', className);
         fallingElement.style.left = Math.random() * 100 + 'vw';
-        fallingElement.style.width = fallingElement.style.height = Math.random() * 20 + 10 + 'px';
+        fallingElement.style.width = Math.random() * 40 + 20 + 'px'; // Adjusted width
+        fallingElement.style.height = fallingElement.style.width; // Keep aspect ratio
         fallingElement.style.opacity = Math.random();
         fallingElement.style.animationDelay = Math.random() * 10 + 's';
         document.body.appendChild(fallingElement);
@@ -46,9 +47,22 @@ function changeBackground() {
         createFallingElements('cherry');
     } else {
         createFallingElements('snow');
+    }
+}
+
+function moveFallingElements(event) {
+    const fallingElements = document.querySelectorAll('.falling');
+    const moveX = (event.clientX - window.innerWidth / 2) / window.innerWidth * 50;
+    const moveY = (event.clientY - window.innerHeight / 2) / window.innerHeight * 50;
+    
+    fallingElements.forEach(el => {
+        el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    });
 }
 
 // Fetch the exchange rate on load
 fetchExchangeRate();
 // Initialize background based on default selection
 changeBackground();
+// Add mousemove event listener
+document.addEventListener('mousemove', moveFallingElements);

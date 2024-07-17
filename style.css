@@ -55,6 +55,8 @@ h1 {
 .falling {
     position: absolute;
     top: -10%;
+    background-size: contain;
+    background-repeat: no-repeat;
     animation: fall 10s infinite;
 }
 .falling.cherry {

@@ -7,7 +7,7 @@ let exchangeRate = 0;
 async function fetchExchangeRate() {
     const response = await fetch('https://api.exchangerate-api.com/v4/latest/MYR');
     const data = await response.json();
-    exchangeRate = data.rates.INR; // MYR to INR
+    exchangeRate = data.rates.INR;
 }
 
 function convertCurrency() {
@@ -30,9 +30,9 @@ function createFallingElements(className) {
         fallingElement.classList.add('falling', className);
         fallingElement.style.left = Math.random() * 100 + 'vw';
         fallingElement.style.width = Math.random() * 40 + 20 + 'px';
-        fallingElement.style.height = fallingElement.style.width; 
+        fallingElement.style.height = fallingElement.style.width;
         fallingElement.style.opacity = Math.random();
-        fallingElement.style.animationDuration = (Math.random() * 3 + 3) + 's'; // Speed variation
+        fallingElement.style.animationDuration = (Math.random() * 3 + 5) + 's';
         fallingElement.style.animationDelay = Math.random() * 10 + 's';
         document.body.appendChild(fallingElement);
     }
@@ -62,6 +62,6 @@ function changeGlow() {
 
 // Fetch the exchange rate on load
 fetchExchangeRate();
-// Initialize glow and background based on default selection
+// Initialize glow and background
 changeGlow();
 changeBackground();

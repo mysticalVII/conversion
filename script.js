@@ -52,11 +52,15 @@ function changeBackground() {
 
 function moveFallingElements(event) {
     const fallingElements = document.querySelectorAll('.falling');
-    const moveX = (event.clientX - window.innerWidth / 2) / window.innerWidth * 50;
-    const moveY = (event.clientY - window.innerHeight / 2) / window.innerHeight * 50;
-    
+    const moveX = (event.clientX - window.innerWidth / 2) / window.innerWidth * 100;
+    const moveY = (event.clientY - window.innerHeight / 2) / window.innerHeight * 100;
+
     fallingElements.forEach(el => {
-        el.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        const originalLeft = parseFloat(el.style.left);
+        const originalTop = parseFloat(el.style.top);
+
+        el.style.left = `calc(${originalLeft}vw + ${moveX}px)`;
+        el.style.top = `calc(${originalTop}vh + ${moveY}px)`;
     });
 }
 

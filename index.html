@@ -15,11 +15,13 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
+            overflow: hidden;
         }
         .container {
             padding: 20px;
             border-radius: 5px;
-            background-color: #343a40;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
         }
         h1 {
@@ -57,21 +59,33 @@
             margin-left: 10px;
             width: 20%;
         }
+        .falling {
+            position: absolute;
+            top: -10%;
+            animation: fall 10s infinite;
+        }
+        .falling.cherry {
+            background-image: url('cherry-blossom.png');
+        }
+        .falling.snow {
+            background-image: url('snowflake.png');
+        }
+        @keyframes fall {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Currency Conversion</h1>
-        <select id="currencySelect" onchange="convertCurrency()">
+        <select id="currencySelect" onchange="convertCurrency(); changeBackground()">
             <option value="MYR">MYR to INR</option>
             <option value="INR">INR to MYR</option>
         </select>
         <div class="currency-row">
             <input type="text" id="currencyInput" placeholder="Enter amount" autofocus oninput="convertCurrency()">
             <button onclick="convertCurrency()">=</button>
-&nbsp;&nbsp;
-
-
             <input type="text" id="currencyOutput" placeholder="Equivalent amount" disabled>
         </div>
     </div>
@@ -101,8 +115,36 @@
             }
         }
 
+        function createFallingElements(className) {
+            for (let i = 0; i < 20; i++) {
+                const fallingElement = document.createElement('div');
+                fallingElement.classList.add('falling', className);
+                fallingElement.style.left = Math.random() * 100 + 'vw';
+                fallingElement.style.width = fallingElement.style.height = Math.random() * 20 + 10 + 'px';
+                fallingElement.style.opacity = Math.random();
+                fallingElement.style.animationDelay = Math.random() * 10 + 's';
+                document.body.appendChild(fallingElement);
+            }
+        }
+
+        function removeFallingElements() {
+            const fallingElements = document.querySelectorAll('.falling');
+            fallingElements.forEach(el => el.remove());
+        }
+
+        function changeBackground() {
+            removeFallingElements();
+            if (currencySelect.value === "MYR") {
+                createFallingElements('cherry');
+            } else {
+                createFallingElements('snow');
+            }
+        }
+
         // Fetch the exchange rate on load
         fetchExchangeRate();
+        // Initialize background based on default selection
+        changeBackground();
     </script>
 </body>
 </html>

@@ -11,23 +11,28 @@ body {
     overflow: hidden;
     position: relative;
 }
+
 .container {
     padding: 20px;
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 0px 20px rgba(255, 182, 193, 0.6); /* Initial glow color: baby pink */
     z-index: 1;
+    transition: box-shadow 0.5s ease-in-out;
 }
+
 h1 {
     text-align: center;
     margin-bottom: 20px;
 }
+
 .currency-row {
     display: flex;
     align-items: center;
     margin-top: 10px;
 }
+
 .currency-row input {
     padding: 10px 20px;
     border: none;
@@ -37,6 +42,7 @@ h1 {
     background-color: #ececec;
     margin-right: 10px;
 }
+
 .currency-row select {
     padding: 10px 20px;
     border: none;
@@ -44,6 +50,7 @@ h1 {
     margin-bottom: 10px;
     width: 30%;
 }
+
 .currency-row button {
     border: none;
     background-color: #4CAF50;
@@ -55,6 +62,7 @@ h1 {
     margin-right: 10px; /* Added space */
     width: 20%;
 }
+
 .falling {
     position: absolute;
     top: -10%;
@@ -62,12 +70,15 @@ h1 {
     background-repeat: no-repeat;
     animation: fall 10s infinite;
 }
+
 .falling.cherry {
     background-image: url('cherry-blossom.png');
 }
+
 .falling.snow {
     background-image: url('snowflake.png');
 }
+
 @keyframes fall {
     0% { transform: translateY(0); }
     100% { transform: translateY(100vh); }

@@ -24,6 +24,15 @@ function convertCurrency() {
     }
 }
 
+function changeBackground() {
+    removeFallingElements();
+    if (currencySelect.value === "MYR") {
+        createFallingElements('cherry');
+    } else {
+        createFallingElements('snow');
+    }
+}
+
 function changeGlow() {
     if (currencySelect.value === "MYR") {
         container.style.boxShadow = "0 0 20px 5px rgba(255, 182, 193, 0.6)"; // Baby pink

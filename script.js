@@ -32,7 +32,7 @@ function createFallingElements(className) {
         fallingElement.style.width = Math.random() * 40 + 20 + 'px';
         fallingElement.style.height = fallingElement.style.width; 
         fallingElement.style.opacity = Math.random();
-        fallingElement.style.animationDuration = Math.random() * 3 + 5 + 's'; // Random duration
+        fallingElement.style.animationDuration = (Math.random() * 3 + 3) + 's'; // Speed variation
         fallingElement.style.animationDelay = Math.random() * 10 + 's';
         document.body.appendChild(fallingElement);
     }
@@ -46,9 +46,9 @@ function removeFallingElements() {
 function changeBackground() {
     removeFallingElements();
     if (currencySelect.value === "MYR") {
-        createFallingElements('cherry-blossom.png');
+        createFallingElements('cherry');
     } else {
-        createFallingElements('snowflake.png');
+        createFallingElements('snow');
     }
 }
 

@@ -1,6 +1,7 @@
 const currencyInput = document.getElementById('currencyInput');
 const currencyOutput = document.getElementById('currencyOutput');
 const currencySelect = document.getElementById('currencySelect');
+const container = document.getElementById('container');
 let exchangeRate = 0;
 
 async function fetchExchangeRate() {
@@ -50,23 +51,16 @@ function changeBackground() {
     }
 }
 
-function moveFallingElements(event) {
-    const fallingElements = document.querySelectorAll('.falling');
-    const moveX = (event.clientX - window.innerWidth / 2) / window.innerWidth * 100;
-    const moveY = (event.clientY - window.innerHeight / 2) / window.innerHeight * 100;
-
-    fallingElements.forEach(el => {
-        const originalLeft = parseFloat(el.style.left);
-        const originalTop = parseFloat(el.style.top);
-
-        el.style.left = `calc(${originalLeft}vw + ${moveX}px)`;
-        el.style.top = `calc(${originalTop}vh + ${moveY}px)`;
-    });
+function changeGlow() {
+    if (currencySelect.value === "MYR") {
+        container.style.boxShadow = "0px 0px 20px rgba(255, 182, 193, 0.6)"; // Baby pink
+    } else {
+        container.style.boxShadow = "0px 0px 20px rgba(173, 216, 230, 0.6)"; // Baby blue
+    }
 }
 
 // Fetch the exchange rate on load
 fetchExchangeRate();
-// Initialize background based on default selection
+// Initialize background and glow based on default selection
 changeBackground();
-// Add mousemove event listener
-document.addEventListener('mousemove', moveFallingElements);
+changeGlow();

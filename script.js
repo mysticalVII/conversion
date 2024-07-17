@@ -1,64 +1,38 @@
-body {
-    background-color: #212529;
-    color: #fff;
-    font-family: sans-serif;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    overflow: hidden;
-    position: relative;
+const currencyInput = document.getElementById('currencyInput');
+const currencyOutput = document.getElementById('currencyOutput');
+const currencySelect = document.getElementById('currencySelect');
+const container = document.getElementById('container');
+let exchangeRate = 0;
+
+async function fetchExchangeRate() {
+    const response = await fetch('https://api.exchangerate-api.com/v4/latest/MYR');
+    const data = await response.json();
+    exchangeRate = data.rates.INR; // MYR to INR
 }
 
-.container {
-    padding: 20px;
-    border-radius: 5px;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    box-shadow: 0px 0px 20px rgba(255, 182, 193, 0.6); /* Initial glow color: baby pink */
-    z-index: 1;
-    transition: box-shadow 0.5s ease-in-out;
+function convertCurrency() {
+    const inputValue = parseFloat(currencyInput.value);
+    if (isNaN(inputValue)) {
+        currencyOutput.value = '';
+        return;
+    }
+
+    if (currencySelect.value === "MYR") {
+        currencyOutput.value = (inputValue * exchangeRate).toFixed(2);
+    } else {
+        currencyOutput.value = (inputValue / exchangeRate).toFixed(2);
+    }
 }
 
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
+function changeGlow() {
+    if (currencySelect.value === "MYR") {
+        container.style.boxShadow = "0 0 20px 5px rgba(255, 182, 193, 0.6)"; // Baby pink
+    } else {
+        container.style.boxShadow = "0 0 20px 5px rgba(173, 216, 230, 0.6)"; // Baby blue
+    }
 }
 
-.currency-row {
-    display: flex;
-    align-items: center;
-    margin-top: 10px;
-}
-
-.currency-row input {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    width: 30%;
-    font-size: 16px;
-    background-color: #ececec;
-    margin-right: 10px;
-}
-
-.currency-row select {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    width: 30%;
-}
-
-.currency-row button {
-    border: none;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 20%;
-}
+// Fetch the exchange rate on load
+fetchExchangeRate();
+// Initialize glow based on default selection
+changeGlow();

@@ -46,9 +46,9 @@ function removeFallingElements() {
 function changeBackground() {
     removeFallingElements();
     if (currencySelect.value === "MYR") {
-        createFallingElements('cherry');
+        createFallingElements('cherry-blossom.png');
     } else {
-        createFallingElements('snow');
+        createFallingElements('snowflake.png');
     }
 }
 

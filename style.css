@@ -17,7 +17,7 @@ body {
     border-radius: 5px;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    box-shadow: 0px 0px 20px rgba(255, 182, 193, 0.6); /* Initial glow color: baby pink */
+    box-shadow: 0px 0px 20px rgba(255, 182, 193, 0.6);
     z-index: 1;
     transition: box-shadow 0.5s ease-in-out;
 }
@@ -61,4 +61,25 @@ h1 {
     margin-left: 10px;
     margin-right: 10px;
     width: 20%;
+}
+
+.falling {
+    position: absolute;
+    top: -10%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    animation: fall linear infinite;
+}
+
+.falling.cherry {
+    background-image: url('cherry-blossom.png');
+}
+
+.falling.snow {
+    background-image: url('snowflake.png');
+}
+
+@keyframes fall {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100vh); }
 }

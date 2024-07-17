@@ -59,26 +59,6 @@ h1 {
     border-radius: 5px;
     cursor: pointer;
     margin-left: 10px;
-    margin-right: 10px; /* Added space */
+    margin-right: 10px;
     width: 20%;
 }
-
-.falling {
-    position: absolute;
-    top: -10%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    animation: fall 10s infinite;
-}
-
-.falling.cherry {
-    background-image: url('cherry-blossom.png');
-}
-
-.falling.snow {
-    background-image: url('snowflake.png');
-}
-
-@keyframes fall {
-    0% { transform: translateY(0); }
-    100% { transform:

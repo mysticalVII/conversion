@@ -1,66 +1,64 @@
-const currencyInput = document.getElementById('currencyInput');
-const currencyOutput = document.getElementById('currencyOutput');
-const currencySelect = document.getElementById('currencySelect');
-const container = document.getElementById('container');
-let exchangeRate = 0;
-
-async function fetchExchangeRate() {
-    const response = await fetch('https://api.exchangerate-api.com/v4/latest/MYR');
-    const data = await response.json();
-    exchangeRate = data.rates.INR; // MYR to INR
+body {
+    background-color: #212529;
+    color: #fff;
+    font-family: sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
 }
 
-function convertCurrency() {
-    const inputValue = parseFloat(currencyInput.value);
-    if (isNaN(inputValue)) {
-        currencyOutput.value = '';
-        return;
-    }
-
-    if (currencySelect.value === "MYR") {
-        currencyOutput.value = (inputValue * exchangeRate).toFixed(2); // Convert MYR to INR
-    } else {
-        currencyOutput.value = (inputValue / exchangeRate).toFixed(2); // Convert INR to MYR
-    }
+.container {
+    padding: 20px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0px 0px 20px rgba(255, 182, 193, 0.6); /* Initial glow color: baby pink */
+    z-index: 1;
+    transition: box-shadow 0.5s ease-in-out;
 }
 
-function createFallingElements(className) {
-    for (let i = 0; i < 20; i++) {
-        const fallingElement = document.createElement('div');
-        fallingElement.classList.add('falling', className);
-        fallingElement.style.left = Math.random() * 100 + 'vw';
-        fallingElement.style.width = Math.random() * 40 + 20 + 'px'; // Adjusted width
-        fallingElement.style.height = fallingElement.style.width; // Keep aspect ratio
-        fallingElement.style.opacity = Math.random();
-        fallingElement.style.animationDelay = Math.random() * 10 + 's';
-        document.body.appendChild(fallingElement);
-    }
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-function removeFallingElements() {
-    const fallingElements = document.querySelectorAll('.falling');
-    fallingElements.forEach(el => el.remove());
+.currency-row {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
 }
 
-function changeBackground() {
-    removeFallingElements();
-    if (currencySelect.value === "MYR") {
-        createFallingElements('cherry');
-    } else {
-        createFallingElements('snow');
-    }
+.currency-row input {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    width: 30%;
+    font-size: 16px;
+    background-color: #ececec;
+    margin-right: 10px;
 }
 
-function changeGlow() {
-    if (currencySelect.value === "MYR") {
-        container.style.boxShadow = "0px 0px 20px rgba(255, 182, 193, 0.6)"; // Baby pink
-    } else {
-        container.style.boxShadow = "0px 0px 20px rgba(173, 216, 230, 0.6)"; // Baby blue
-    }
+.currency-row select {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 30%;
 }
 
-// Fetch the exchange rate on load
-fetchExchangeRate();
-// Initialize background and glow based on default selection
-changeBackground();
-changeGlow();
+.currency-row button {
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 20%;
+}

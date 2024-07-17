@@ -18,10 +18,28 @@ function convertCurrency() {
     }
 
     if (currencySelect.value === "MYR") {
-        currencyOutput.value = (inputValue * exchangeRate).toFixed(2);
+        currencyOutput.value = (inputValue * exchangeRate).toFixed(2); // Convert MYR to INR
     } else {
-        currencyOutput.value = (inputValue / exchangeRate).toFixed(2);
+        currencyOutput.value = (inputValue / exchangeRate).toFixed(2); // Convert INR to MYR
     }
+}
+
+function createFallingElements(className) {
+    for (let i = 0; i < 20; i++) {
+        const fallingElement = document.createElement('div');
+        fallingElement.classList.add('falling', className);
+        fallingElement.style.left = Math.random() * 100 + 'vw';
+        fallingElement.style.width = Math.random() * 40 + 20 + 'px'; // Adjusted width
+        fallingElement.style.height = fallingElement.style.width; // Keep aspect ratio
+        fallingElement.style.opacity = Math.random();
+        fallingElement.style.animationDelay = Math.random() * 10 + 's';
+        document.body.appendChild(fallingElement);
+    }
+}
+
+function removeFallingElements() {
+    const fallingElements = document.querySelectorAll('.falling');
+    fallingElements.forEach(el => el.remove());
 }
 
 function changeBackground() {
@@ -35,13 +53,14 @@ function changeBackground() {
 
 function changeGlow() {
     if (currencySelect.value === "MYR") {
-        container.style.boxShadow = "0 0 20px 5px rgba(255, 182, 193, 0.6)"; // Baby pink
+        container.style.boxShadow = "0px 0px 20px rgba(255, 182, 193, 0.6)"; // Baby pink
     } else {
-        container.style.boxShadow = "0 0 20px 5px rgba(173, 216, 230, 0.6)"; // Baby blue
+        container.style.boxShadow = "0px 0px 20px rgba(173, 216, 230, 0.6)"; // Baby blue
     }
 }
 
 // Fetch the exchange rate on load
 fetchExchangeRate();
-// Initialize glow based on default selection
+// Initialize background and glow based on default selection
+changeBackground();
 changeGlow();

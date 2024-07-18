@@ -20,6 +20,8 @@ body {
     box-shadow: 0px 0px 20px rgba(255, 182, 193, 0.6);
     z-index: 1;
     transition: box-shadow 0.5s ease-in-out;
+    max-width: 90%;
+    width: 400px;
 }
 
 h1 {
@@ -33,34 +35,30 @@ h1 {
     margin-top: 10px;
 }
 
-.currency-row input {
+.currency-row input, .currency-row select, .currency-row button {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    width: 30%;
     font-size: 16px;
+}
+
+.currency-row input {
+    width: calc(35% - 10px);
     background-color: #ececec;
     margin-right: 10px;
 }
 
 .currency-row select {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+    width: calc(100% - 40px);
     margin-bottom: 10px;
-    width: 30%;
 }
 
 .currency-row button {
-    border: none;
     background-color: #4CAF50;
     color: white;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
     margin-left: 10px;
     margin-right: 10px;
-    width: 20%;
+    width: calc(20% - 20px);
 }
 
 .falling {
@@ -82,4 +80,22 @@ h1 {
 @keyframes fall {
     0% { transform: translateY(0); }
     100% { transform: translateY(100vh); }
+}
+
+/* Responsive Styles */
+@media (max-width: 600px) {
+    .currency-row {
+        flex-direction: column;
+    }
+
+    .currency-row input, .currency-row select, .currency-row button {
+        width: 100%;
+        margin: 5px 0;
+    }
+
+    .currency-row button {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
